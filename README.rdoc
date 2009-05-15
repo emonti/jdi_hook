@@ -50,7 +50,7 @@ Debugging Interface (JDI) API.
 
 == REQUIREMENTS:
 
-* jruby - http://jruby.orb
+* jruby - http://jruby.org
 * A JRE (recommend Sun JDK version 1.6+) - http://java.sun.com/javase/downloads/
 
 == INSTALL:
