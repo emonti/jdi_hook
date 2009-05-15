@@ -10,15 +10,15 @@ Debugging Interface (JDI) API.
 == FEATURES/PROBLEMS:
 
 * JdiHook aims to provide a scriptable engine around Sun's Java Debugging 
-  Interface (JDI). The use of such an engine is left open-ended, but the 
-  initial rationale was the need for a rapid way to instrument and dynamically
-  analyze Java applications for reverse engineering and security testing 
-  purposes.
+  Interface (JDI) using Ruby. The uses of such an engine are intentionally 
+  open-ended, but the initial rationale was the need for a rapid way to 
+  instrument and dynamically analyze Java applications for reverse engineering 
+  and security-testing purposes.
 
 * You already use JAD or JODE for class decompiling, but you need a quick and 
   painless way to observe call trees, hit traces, or other target behaviors 
   during runtime and/or create bespoke runtime debugging tools just like you 
-  would using PyDbg or Ragweed for a native target.
+  would using PyDbg or Ragweed for a native target. JdiHook aims to do this.
 
 == SYNOPSIS:
 
@@ -28,7 +28,8 @@ Debugging Interface (JDI) API.
   # Start a java target class. Kind of equivalent to running 'jdb HelloWorld'
   vm = JdiHook.command_line_launch("HelloWorld")
 
-  # Instantiate and attach debugging event handler
+  # Instantiate and attach debugging event handler. MethodTracer is geared
+  # for attaching hooks to method entry and exit events.
   dbg = JdiHook::MethodTracer.new vm, :redirect_stdio => true
 
   # Define some handlers for Java method entry and exit events to dump
@@ -37,7 +38,7 @@ Debugging Interface (JDI) API.
   en_proc = lambda {|this, evt| puts " [*] " << this.notify_entry(evt.method) }
   ex_proc = lambda {|this, evt| puts " [*] " << this.notify_exit(evt.method) }
 
-  # Configure these hooks to fire on regex pattern matches on method names
+  # Configure some event hooks to fire on regex pattern matches by method name
   dbg.meth_hooks = { 
     /\.main$/ => { :on_entry => en_proc, :on_exit => ex_proc },
     /.*/      => { :on_entry => en_proc },
@@ -49,8 +50,8 @@ Debugging Interface (JDI) API.
 
 == REQUIREMENTS:
 
-* jruby
-* Sun JRE/JDK (recommend Sun JDK version 1.6+)
+* jruby - http://jruby.orb
+* A JRE (recommend Sun JDK version 1.6+) - http://java.sun.com/javase/downloads/
 
 == INSTALL:
 
