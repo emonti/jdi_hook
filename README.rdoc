@@ -11,14 +11,14 @@ Debugging Interface (JDI) API.
 
 * JdiHook aims to provide a scriptable engine around Sun's Java Debugging 
   Interface (JDI) using JRuby. The uses of such an engine are intentionally 
-  open-ended, but the initial rationale was the need for a rapid way to 
-  instrument and dynamically analyze Java applications for reverse engineering 
-  and security-testing purposes.
+  open-ended, but the initial rationale was the need for custom instrumentation 
+  and dynamic analysis tools for Java applications with a reverse engineering 
+  and vulnerability testing mindset.
 
 * You already use JAD or JODE for class decompiling, but you need a quick and 
-  painless way to observe call trees, hit traces, or other target behaviors 
-  during runtime and/or create bespoke runtime debugging tools just like you 
-  would using PyDbg or Ragweed for a native target. JdiHook aims to do this.
+  painless way to observe call trees, hit traces, and other target behaviors 
+  during runtime. Create bespoke Java runtime debugging scripts just like you 
+  would using PyDbg or Ragweed on a native target.
 
 == SYNOPSIS:
 
