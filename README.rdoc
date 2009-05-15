@@ -28,7 +28,7 @@ Debugging Interface (JDI) API.
   # Start a java target class. Kind of equivalent to running 'jdb HelloWorld'
   vm = JdiHook.command_line_launch("HelloWorld")
 
-  # Instantiate and attach debugger
+  # Instantiate and attach debugging event handler
   dbg = JdiHook::MethodTracer.new vm, :redirect_stdio => true
 
   # Define some handlers for Java method entry and exit events to dump
