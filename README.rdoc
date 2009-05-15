@@ -10,7 +10,7 @@ Debugging Interface (JDI) API.
 == FEATURES/PROBLEMS:
 
 * JdiHook aims to provide a scriptable engine around Sun's Java Debugging 
-  Interface (JDI) using Ruby. The uses of such an engine are intentionally 
+  Interface (JDI) using JRuby. The uses of such an engine are intentionally 
   open-ended, but the initial rationale was the need for a rapid way to 
   instrument and dynamically analyze Java applications for reverse engineering 
   and security-testing purposes.
