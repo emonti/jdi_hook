@@ -1,36 +1,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-	<title>emonti/jdi_hook @ GitHub</title>
-	
-	<style type="text/css">
-		body {
-  		margin-top: 1.0em;
-  		background-color: #ffffff;
-		  font-family: "helvetica"; 
-  		color: #000000;
+  <title>emonti/jdi_hook @ GitHub</title>
+  
+  <style type="text/css">
+    body {
+      margin-top: 1.0em;
+      background-color: #ffffff;
+      font-family: "helvetica"; 
+      color: #000000;
     }
     #container {
       margin: 0 auto;
       width: 700px;
     }
-		h1 { font-size: 3.8em; color: #000000; margin-bottom: 3px; }
-		h1 .small { font-size: 0.4em; }
-		h1 a { text-decoration: none }
-		h2 { font-size: 1.5em; color: #000000; }
+    h1 { font-size: 3.8em; color: #000000; margin-bottom: 3px; }
+    h1 .small { font-size: 0.4em; }
+    h1 a { text-decoration: none }
+    h2 { font-size: 1.5em; color: #000000; }
     h3 { text-align: center; color: #000000; }
     a { color: #000000; }
     .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
     .download { float: right; }
-		pre { background: #000; color: #fff; padding: 15px;}
+    pre { background: #000; color: #fff; padding: 15px;}
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
-	</style>
-	
+  </style>
+  
 </head>
 
 <body>
@@ -52,29 +52,33 @@
       A ruby scripting interface to Sun JDI for Java debugging
     </div>
 
-    <p>You already use JAD or JODE for class decompiling, but you need a quick and painless way to observe call trees, hit traces, and other target behaviors during runtime. Create bespoke Java runtime debugging scripts just like you would using PyDbg or Ragweed on a native target.
+    <div align="center"><a href="">
+        <img src="img/ninja_toy.png"/><br/>
+        <small>No affiliation. But you know you want to buy me...</small>
+    </a></div>
 
-JdiHook aims to provide a scriptable engine around Sun’s Java Debugging Interface (JDI) using JRuby. The uses of such an engine are intentionally open-ended, but the initial rationale was the need for custom instrumentation and dynamic analysis tools for Java applications with a reverse engineering and vulnerability testing mindset.
-</p><h2>Dependencies</h2>
-<p>jruby http://jruby.org
-Recommended: sun jdk 1.6+</p>
-<h2>License</h2>
-<p>(The MIT License)
+    <p>You already use JAD or JODE for class decompiling, but you need a quick and painless way to observe call trees, hit traces, and other target behaviors during runtime. Create bespoke Java runtime debugging scripts just like you would using PyDbg or Ragweed on a native target.</p>
 
-Copyright © 2008 Eric Monti - Matasano Security
+    <p>JdiHook aims to provide a scriptable engine around Sun’s Java Debugging Interface (JDI) using JRuby. The uses of such an engine are intentionally open-ended, but the initial rationale was the need for custom instrumentation and dynamic analysis tools for Java applications with a reverse engineering and vulnerability testing mindset.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ‘Software’), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+    </p><h2>Dependencies</h2>
+    <a href="http://jruby.org">jruby</a><br/>
+    Recommended: <a href="http://java.sun.com">sun jdk 1.6+</a>
+    </p>
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED ‘AS IS’, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. </p>
-<h2>Authors</h2>
-<p>Eric Monti (emonti@matasano.com)<br/><br/>      </p>
+    <h2>Author</h2>
+    <p>Eric Monti (emonti@matasano.com)</p>
 
 
     <h2>Download</h2>
     <p>
-      You can download this project in either
+      The quickest way to get up and running is with the gem:
+      <pre>
+jruby sources -a gems.github.com     # you only need to do this once.
+jruby -S gem install emonti-jdi_hook</pre> </p>
+
+    <p>
+      You can also download this project in either
       <a href="http://github.com/emonti/jdi_hook/zipball/master">zip</a> or
       <a href="http://github.com/emonti/jdi_hook/tarball/master">tar</a> formats.
     </p>
@@ -87,6 +91,25 @@ THE SOFTWARE IS PROVIDED ‘AS IS’, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
       get the source code on GitHub : <a href="http://github.com/emonti/jdi_hook">emonti/jdi_hook</a>
     </div>
     
+    <h2>Documentation</h2>
+    <p>Please refer to the <a href="rdoc/index.html">jdi_hook rdoc pages</a></p>
+
+    <h2>License</h2>
+    <p>(The MIT License)</p>
+
+    <p>Copyright © 2008 Eric Monti - Matasano Security</p>
+
+    <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ‘Software’), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+    <p>
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+    </p>
+
+    <p>
+    THE SOFTWARE IS PROVIDED ‘AS IS’, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    </p>
+
+
   </div>
 
   
