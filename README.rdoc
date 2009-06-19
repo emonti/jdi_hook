@@ -56,7 +56,7 @@ Debugging Interface (JDI) API.
 == INSTALL:
 
 * jruby -S gem sources -a http://gems.github.com # only have to do this once
-* jruby -S gem install emonti-rbkb
+* jruby -S gem install emonti-jdi_hook
 
 
 == LICENSE:

@@ -139,7 +139,7 @@ class JdiTrace
         meth = event.method
         meth_name = "#{meth.declaringType.name}.#{meth.name}"
         if @meth_regex.nil? or @meth_regex.match(meth_name)
-          if @java_version >= "1.6.0"
+          if @java_version >= "1.6"
             begin
               arg = thread.frame(0).getArgumentValues().to_a.map do |x| 
                 (x.nil?)? "null" : x

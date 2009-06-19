@@ -1,11 +1,9 @@
+include Java
 
 module JdiHook
   VERSION = '1.0.0'
   LIBPATH = ::File.expand_path(::File.dirname(__FILE__)) + ::File::SEPARATOR
   PATH = ::File.dirname(LIBPATH) + ::File::SEPARATOR
-
-
-  include Java
 
   include_class [
     "com.sun.jdi.IncompatibleThreadStateException",
@@ -27,6 +25,10 @@ module JdiHook
     "java.util.List",
     "java.util.Map",
   ]
+
+  include_class "com.sun.jdi.Method" do |pkg,name|
+    "JdiMethod"
+  end
 
   ## Class sugar methods
 
@@ -162,5 +164,11 @@ module JdiHook
     Dir.glob(search_me).sort.each {|rb| require rb}
   end
 end
-JdiHook.require_all_libs_relative_to(__FILE__)
+
+require "jdi_hook/helpers.rb"
+require "jdi_hook/extensions.rb"
+require "jdi_hook/base_debugger.rb"
+require "jdi_hook/event_thread.rb"
+require "jdi_hook/method_tracer.rb"
+require "jdi_hook/stream_redirect_thread.rb"
 

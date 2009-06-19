@@ -1,4 +1,3 @@
-
 module JdiHook
   class MethodTracer < BaseDebugger
 
@@ -56,25 +55,9 @@ module JdiHook
       end
     end
 
-    def meth_name(meth)
-      "#{meth.declaringType.name}.#{meth.name}"
-    end
-
-    def notify_entry(meth)
-      m_name = meth_name(meth)
-      args = meth.argumentTypeNames.join(', ')
-      "MethodEntry: #{m_name}(#{args})"
-    end
-
-    def notify_exit(meth)
-      m_name = meth_name(meth)
-      "MethodExit: #{m_name}"
-    end
-
     def handle_method_entry(event)
-      meth = event.method
-      m_name = meth_name(meth)
-      if h=find_method_hook(m_name) 
+      meth_name = event.method.full_name
+      if h=find_method_hook(meth_name) 
         if block=h[1][:on_entry]
           block.call(self, event)
         end
@@ -82,9 +65,8 @@ module JdiHook
     end
 
     def handle_method_exit(event)
-      meth = event.method
-      m_name = meth_name(meth)
-      if h=find_method_hook(m_name)
+      meth_name = event.method.full_name
+      if h=find_method_hook(meth_name)
         if block=h[1][:on_exit]
           block.call(self, event)
         end
