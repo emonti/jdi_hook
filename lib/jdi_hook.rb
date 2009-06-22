@@ -20,6 +20,7 @@ module JdiHook
     "com.sun.jdi.event.VMStartEvent",
     "com.sun.jdi.request.EventRequest",
     "com.sun.jdi.request.StepRequest",
+    "com.sun.tools.jdi.ArrayReferenceImpl",
     "java.io.InputStreamReader",
     "java.lang.InterruptedException", 
     "java.util.List",
