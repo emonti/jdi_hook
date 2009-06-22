@@ -1,4 +1,4 @@
-# This file contains ruby method extensions to several JDI java classes which
+# This file contains ruby method extensions to various JDI Java classes which
 # have been imported into the JdiHook ruby namespace from the top-level 
 # jdi_hook.rb
 
