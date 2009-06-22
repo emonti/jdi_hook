@@ -35,8 +35,8 @@ Debugging Interface (JDI) API.
   # Define some handlers for Java method entry and exit events to dump
   # some information about the method invocation. Event handlers for 
   # MethodTracer are supplied as a ruby Proc/lambda/block
-  en_proc = lambda {|this, evt| puts " [*] #{evt.jh_describe}" }
-  ex_proc = lambda {|this, evt| puts " [*] #{evt.jh_describe}" }
+  en_proc = lambda {|this, evt| puts " [*] #{evt.jh_describe_event}" }
+  ex_proc = lambda {|this, evt| puts " [*] #{evt.jh_describe_event}" }
 
   # Configure some event hooks to fire on regex pattern matches by method name
   dbg.meth_hooks = { 
