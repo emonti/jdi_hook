@@ -1,6 +1,6 @@
 jdi_hook
     by Eric Monti
-    http://github.com/emonti/jdi_hook
+    http://emonti.github.com/jdi_hook
 
 == DESCRIPTION:
 

@@ -5,11 +5,6 @@ module JdiHook
   # Implementations should override the following callbacks: 
   # create_event_requests, receive_event, and cleanup
   class BaseDebugger
-    include_class [  
-      "java.lang.InterruptedException",
-      "com.sun.jdi.request.EventRequest",
-    ] 
-
     attr_accessor :class_filters_exc, :class_filters_inc
     attr_reader   :vm
 
@@ -29,8 +24,7 @@ module JdiHook
       @redirect_stdio = opts[:redirect_stdio]
     end
 
-    # This method begins the debugging session setting up the event
-    # handler and 
+    # This method begins the debugging session
     def go
       @vm.setDebugTraceMode(@debug_mode)
       create_event_requests(@vm.eventRequestManager() )
@@ -112,7 +106,7 @@ module JdiHook
         err_thread.join()
         return [out_thread, err_thread]
       else
-        STDERR.puts "WARNING: can't redirect output on this target'"
+        STDERR.puts "WARNING: can't redirect output on this target"
       end
     end
   end
