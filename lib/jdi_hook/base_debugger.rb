@@ -24,10 +24,15 @@ module JdiHook
       @redirect_stdio = opts[:redirect_stdio]
     end
 
-    # This method begins the debugging session
-    def go
+    def prepare_session
       @vm.setDebugTraceMode(@debug_mode)
       create_event_requests(@vm.eventRequestManager() )
+      @session_prepared = true
+    end
+
+    # This method begins the debugging session
+    def go
+      prepare_session unless @session_prepared
       @evt_thread = EventThread.new(self)
       @evt_thread.start()
       if @redirect_stdio
@@ -43,6 +48,16 @@ module JdiHook
         cleanup()
         @evt_thread = nil
       end
+    end
+
+    # waits until events have been returned in the event queue and returns
+    # a com.sun.jdi.event.EventSet instance
+    def wait_for_events(millisec=nil)
+      prepare_session unless @session_prepared
+      @last_event_set.resume() if @last_event_set
+      queue = @vm.eventQueue()
+      @last_event_set = millisec ? queue.remove(millisec) : queue.remove()
+      return @last_event_set
     end
 
     # This method adds class exclusion and inclusion filters to an
@@ -100,11 +115,12 @@ module JdiHook
                                                "Process STDERR",
                                                err)
 
+        @output_redirection_threads = [out_thread, err_thread]
         out_thread.start()
         err_thread.start()
         out_thread.join()
         err_thread.join()
-        return [out_thread, err_thread]
+        return @output_redirection_threads
       else
         STDERR.puts "WARNING: can't redirect output on this target"
       end

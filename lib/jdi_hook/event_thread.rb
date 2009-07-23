@@ -1,13 +1,5 @@
 module JdiHook
   class EventThread < java.lang.Thread
-    include_class [
-      "java.lang.InterruptedException", 
-      "com.sun.jdi.VMDisconnectedException",
-      "com.sun.jdi.event.VMStartEvent",
-      "com.sun.jdi.event.VMDeathEvent",
-      "com.sun.jdi.event.VMDisconnectEvent",
-    ]
-
     attr_reader :connected
 
     def initialize( handler )

@@ -7,8 +7,9 @@ module JdiHook
 
   include_class [
     "com.sun.jdi.IncompatibleThreadStateException",
-    "com.sun.jdi.VMDisconnectedException",
     "com.sun.jdi.InternalException",
+    "com.sun.jdi.StackFrame",
+    "com.sun.jdi.VMDisconnectedException",
     "com.sun.jdi.event.ClassPrepareEvent",
     "com.sun.jdi.event.MethodEntryEvent",
     "com.sun.jdi.event.MethodExitEvent",
@@ -22,10 +23,12 @@ module JdiHook
     "com.sun.jdi.request.StepRequest",
     "com.sun.tools.jdi.ArrayReferenceImpl",
     "java.io.InputStreamReader",
-    "java.lang.InterruptedException", 
+    "java.lang.InterruptedException",
     "java.util.List",
     "java.util.Map",
   ]
+  
+
 
   include_class "com.sun.jdi.Method" do |pkg,name|
     "JdiMethod"

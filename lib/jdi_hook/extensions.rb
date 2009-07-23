@@ -2,6 +2,12 @@
 # imported into the JdiHook ruby namespace at the top-level in jdi_hook.rb
 
 module JdiHook
+  class ArrayReferenceImpl
+    def to_s
+      self.values.to_s
+    end
+  end
+
   module JdiMethod
     def full_name
       "#{self.declaringType.name}.#{self.name}"
@@ -12,44 +18,48 @@ module JdiHook
       "#{self.full_name}(#{args.join(', ')})"
     end
     alias jh_describe jh_describe_method
-
-    def jh_describe_call(opts={})
-      frame = opts[:frame]
-      if frame and java.lang.System.getProperty("java.version") >= "1.6"
-        args = 
-          begin
-            frame.argument_values().to_a.map {|v| v || "null" }
-          rescue InternalException => exc
-            ["ERR: #{exc}"]
-          rescue IncompatibleThreadStateException
-            ["ERR: got IncompatibleThreadStateException"]
-          end
-        "#{self.full_name}(#{args.join(', ')})"
-      else
-        self.jh_describe_method
-      end
-    end
-  end
-
-  class ArrayReferenceImpl
-    def to_s
-      self.values.to_s
-    end
   end
 
   module MethodEntryEvent
-    include EventHelpers
-
     def jh_describe_event(opts={})
-      frame = self.thread.frame(0)
-      "MethodEntry: #{ self.method.jh_describe_call(:frame => frame) }"
+      self.thread.frame(0).jh_describe_method_entry
     end
   end
 
   module MethodExitEvent
-    include EventHelpers
     def jh_describe_event(opts={})
-      "MethodExit: #{self.method.full_name}"
+      extra = 
+        if( java.lang.System.getProperty("java.version") >= "1.6" and
+            self.virtualMachine.can_get_method_return_values? )
+           " returns (#{self.returnValue.type.name}: #{self.returnValue})"
+        end
+
+      "MethodExit: #{ self.method.full_name }#{ extra }"
+    end
+  end
+
+  module StackFrame
+    def jh_describe_method_entry
+      meth = self.location.method
+
+      # argument values are only available in java 1.6
+      if java.lang.System.getProperty("java.version") >= "1.6"
+        args = []
+        arg_types = meth.argumentTypeNames.to_a
+        arg_values = self.argumentValues.to_a
+        begin
+          arg_values.size.times do |i|
+            args[i] = "#{arg_types[i]}: #{arg_values[i]}"
+          end
+        rescue InternalException => exc
+          ["ERR: #{exc}"]
+        rescue IncompatibleThreadStateException
+          ["ERR: got IncompatibleThreadStateException"]
+        end
+        "Method Entry: #{meth.full_name}(#{args.join(', ')})"
+      else
+        meth.jh_describe_method
+      end
     end
   end
 end
