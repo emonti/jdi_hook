@@ -15,26 +15,44 @@ module JdiHook
 
     def jh_describe_method(opts={})
       args = self.argumentTypeNames.to_a
-      "#{self.full_name}(#{args.join(', ')})"
+      "#{self.full_name}(#{args.join(', ')})\n"
     end
     alias jh_describe jh_describe_method
   end
 
   module MethodEntryEvent
+    # returns a printable description of a single method entry
+    #   Meaningful hash options:
+    #     :frame    = optional stack frame index (note: 0 is highest on stack)
     def jh_describe_event(opts={})
-      self.thread.frame(0).jh_describe_method_entry
+      f_idx = opts[:frame] || 0
+      "MethodEntry: #{self.thread.frame(f_idx).jh_describe_method_entry}"
+    end
+    
+    # returns a printable description string of the call-stack
+    #   Meaningful hash options:
+    #     :start    = optional start index in stack frames list
+    #     :maxdepth = optional maximum depth number
+    def jh_describe_callstack(opts={})
+      fcount = self.thread.frame_count
+      start = opts[:start] || 0
+      depth = (d=opts[:maxdepth] && d > 0 && d < fcount)? d : fcount
+      ret = "CallStack [displayed #{depth}/#{fcount}]:\n"
+      self.thread.frames(start, depth).each_with_index do |f,i| 
+        ret << "    [#{i}] #{f.jh_describe_method_entry}}\n"
+      end
+      return ret
     end
   end
 
   module MethodExitEvent
     def jh_describe_event(opts={})
       extra = 
-        if( java.lang.System.getProperty("java.version") >= "1.6" and
-            self.virtualMachine.can_get_method_return_values? )
+        if JdiHook::JVM_VERSION >= "1.6" and self.virtualMachine.can_get_method_return_values?
            " returns (#{self.returnValue.type.name}: #{self.returnValue})"
         end
 
-      "MethodExit: #{ self.method.full_name }#{ extra }"
+      "MethodExit: #{self.method.full_name}#{extra}"
     end
   end
 
@@ -43,20 +61,20 @@ module JdiHook
       meth = self.location.method
 
       # argument values are only available in java 1.6
-      if java.lang.System.getProperty("java.version") >= "1.6"
+      if JdiHook::JVM_VERSION >= "1.6"
         args = []
-        arg_types = meth.argumentTypeNames.to_a
-        arg_values = self.argumentValues.to_a
         begin
+          arg_types = meth.argumentTypeNames.to_a
+          arg_values = self.argumentValues.to_a
           arg_values.size.times do |i|
             args[i] = "#{arg_types[i]}: #{arg_values[i]}"
           end
-        rescue InternalException => exc
-          ["ERR: #{exc}"]
         rescue IncompatibleThreadStateException
-          ["ERR: got IncompatibleThreadStateException"]
+          args << "ERR: got IncompatibleThreadStateException"
+        rescue
+          args << "ERR: got #{$!}"
         end
-        "Method Entry: #{meth.full_name}(#{args.join(', ')})"
+        "#{meth.full_name}(#{args.join(', ')})"
       else
         meth.jh_describe_method
       end

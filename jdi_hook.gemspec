@@ -6,12 +6,12 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Eric Monti"]
-  s.date = %q{2009-07-23}
+  s.date = %q{2009-07-24}
   s.description = %q{JdiHook is a ruby-scriptable Java debugger based on and around Sun's Java 
 Debugging Interface (JDI) API.}
   s.email = %q{emonti@matasano.com}
   s.extra_rdoc_files = ["History.txt", "README.rdoc"]
-  s.files = ["HelloWorld.java", "History.txt", "README.rdoc", "Rakefile", "hello_test.rb", "jdi_hook.gemspec", "lib/jdi_hook.rb", "lib/jdi_hook/base_debugger.rb", "lib/jdi_hook/event_thread.rb", "lib/jdi_hook/extensions.rb", "lib/jdi_hook/helpers.rb", "lib/jdi_hook/method_tracer.rb", "lib/jdi_hook/stream_redirect_thread.rb", "samples/base_test.rb", "samples/meth_test.rb", "tasks/ann.rake", "tasks/bones.rake", "tasks/gem.rake", "tasks/git.rake", "tasks/notes.rake", "tasks/post_load.rake", "tasks/rdoc.rake", "tasks/rubyforge.rake", "tasks/setup.rb", "tasks/spec.rake", "tasks/svn.rake", "tasks/test.rake", "tasks/zentest.rake"]
+  s.files = ["HelloWorld.java", "History.txt", "README.rdoc", "Rakefile", "jdi_hook.gemspec", "lib/jdi_hook.rb", "lib/jdi_hook/base_debugger.rb", "lib/jdi_hook/event_thread.rb", "lib/jdi_hook/extensions.rb", "lib/jdi_hook/helpers.rb", "lib/jdi_hook/method_tracer.rb", "lib/jdi_hook/stream_redirect_thread.rb", "samples/base_test.rb", "samples/hello_test.rb", "samples/meth_test.rb", "samples/sock_test.rb", "tasks/ann.rake", "tasks/bones.rake", "tasks/gem.rake", "tasks/git.rake", "tasks/notes.rake", "tasks/post_load.rake", "tasks/rdoc.rake", "tasks/rubyforge.rake", "tasks/setup.rb", "tasks/spec.rake", "tasks/svn.rake", "tasks/test.rake", "tasks/zentest.rake", "tst.out"]
   s.homepage = %q{http://emonti.github.com/jdi_hook}
   s.rdoc_options = ["--main", "README.rdoc"]
   s.require_paths = ["lib"]

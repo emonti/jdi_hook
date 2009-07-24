@@ -5,6 +5,7 @@ module JdiHook
   LIBPATH = ::File.expand_path(::File.dirname(__FILE__)) + ::File::SEPARATOR
   PATH = ::File.dirname(LIBPATH) + ::File::SEPARATOR
 
+  JVM_VERSION = java.lang.System.getProperty("java.version")
   include_class [
     "com.sun.jdi.IncompatibleThreadStateException",
     "com.sun.jdi.InternalException",
