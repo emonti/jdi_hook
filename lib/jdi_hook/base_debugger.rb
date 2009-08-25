@@ -8,6 +8,9 @@ module JdiHook
     attr_accessor :class_filters_exc, :class_filters_inc
     attr_reader   :vm
 
+    # These class exclusion filters are applied in the debugging event loop.
+    # Anything here will be completely excluded from method entry and exit 
+    # events
     DEFAULT_EXCLUDES = [
       # Base java/sun stuff to exclude
       "java.*", "javax.*", "sun.*", "com.sun.*", 

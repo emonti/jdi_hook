@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Eric Monti"]
-  s.date = %q{2009-07-24}
+  s.date = %q{2009-07-28}
   s.description = %q{JdiHook is a ruby-scriptable Java debugger based on and around Sun's Java 
 Debugging Interface (JDI) API.}
   s.email = %q{emonti@matasano.com}
