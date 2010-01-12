@@ -9,6 +9,7 @@ module JdiHook
   include_class [
     "com.sun.jdi.IncompatibleThreadStateException",
     "com.sun.jdi.InternalException",
+    "com.sun.jdi.ObjectReference",
     "com.sun.jdi.StackFrame",
     "com.sun.jdi.VMDisconnectedException",
     "com.sun.jdi.event.ClassPrepareEvent",
