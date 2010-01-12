@@ -80,4 +80,22 @@ module JdiHook
       end
     end
   end
+
+  module ObjectReference
+    # This is not currently functioning. Problems afoot with args
+    # and deadlocks most likely related to remote thread reference.
+    def invoke(meth, args, opts=0, thr=nil)
+      if meth.is_a? String
+        # XXX this is pretty lazy, 
+        # see also methodsByName(String name, String signature) 
+        meth_lst = self.referenceType.methodsByName(meth)
+        meth = meth_lst.to_a.first 
+      end
+      thr ||= self.owningThread
+      arg_lst = java.util.ArrayList.new
+      args.each {|x| arg_lst.add(x) } if args
+      self.invokeMethod(thr, meth, arg_lst, opts)
+    end
+  end
+
 end
