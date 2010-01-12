@@ -16,7 +16,7 @@ module JdiHook
       "java.*", "javax.*", "sun.*", "com.sun.*", 
       # several exclusions for jruby/jirb targets
       "org.jruby.*", "jline.*", "ruby.*", "org.jcodings.*", "jruby.*", 
-      "org.joni.*"
+      "org.joni.*", "org.objectweb.*"
     ]
 
     def initialize(vm, opts={})
